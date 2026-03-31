@@ -1,6 +1,7 @@
 import os
 import contextlib
 import psycopg2
+import psycopg2.pool
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,6 +15,7 @@ DB_NAME = os.getenv("DB_NAME", "wisesales")
 # Connection pool
 connection_pool = None
 
+
 def init_db_pool():
     global connection_pool
     if not connection_pool:
@@ -26,6 +28,7 @@ def init_db_pool():
             port=DB_PORT,
             database=DB_NAME,
         )
+
 
 def close_db_pool():
     global connection_pool
